@@ -30,4 +30,10 @@ public class StringTests
         string text = "Hi!";
         Assert.IsTrue(text.Contains("awesome"), "Substring 'awesome' not found.");
     }
+
+    [Test]
+    public static void SomeStaticFunction()
+    {
+        Assert.IsTrue(true, "true is true");
+    }
 }

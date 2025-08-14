@@ -30,7 +30,7 @@ class TestRunner
         var testMethods = assembly
             .GetTypes()
             .Where(type => type.IsClass && type.IsPublic)
-            .SelectMany(type => type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static))
+            .SelectMany(clas => clas.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static))
             .Where(method => method.GetCustomAttributes()
                          .Any(attr => attr.GetType().Name == "TestAttribute"))
             .ToList();

@@ -19,6 +19,7 @@ StringTests:
 	[PASS] ShouldContainSubstring
 	[FAIL] ShouldContainSubstringFail
 		Substring 'awesome' not found.
-  Class Summary: Passed: 2, Failed: 2
+	[PASS] SomeStaticFunction
+  Class Summary: Passed: 3, Failed: 2
 
-Total: 10, Passed: 6, Failed: 4
+Total: 11, Passed: 7, Failed: 4
