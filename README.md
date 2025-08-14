@@ -11,6 +11,10 @@ Step 3 - Execute and Report
 Once I had all the test methods the only thing left to do is to execute them. I use 2 nested loops
 to go over the groups and the methods, for each method I check if its insatnce method if it does I create instace and invoke it otherwise I just invoke it. while I go over htem I also use a string builder for the report, if the test fails I add to the report the exeception it throwed. in the end I print the string to the console and also to a text file.
 
+Step 4 - BeforeAll and AfterAll
+To add this actions I did basiclly the same steps I did for the tests but with different attributes
+and invoked them before and after the tests accordinglly. 
+
 Usage:
 To use the test-runner add your project to the main folder "test-runner-assignment", add 
 "using TestFramework" to your test file and above each test method add [Test].
