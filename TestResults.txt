@@ -4,7 +4,8 @@ MathTests:
 		5 is bigger than 1
 	[FAIL] DivisionByZero
 		Attempted to divide by zero.
-  Class Summary: Passed: 1, Failed: 2
+	[PASS] YEqual5
+  Class Summary: Passed: 2, Failed: 2
 
 ObjectTests:
 	[PASS] Objects_WithSameReference_ShouldBeEqual
@@ -22,4 +23,4 @@ StringTests:
 	[PASS] SomeStaticFunction
   Class Summary: Passed: 3, Failed: 2
 
-Total: 11, Passed: 7, Failed: 4
+Total: 12, Passed: 8, Failed: 4

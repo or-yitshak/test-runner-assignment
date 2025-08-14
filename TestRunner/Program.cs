@@ -27,6 +27,36 @@ class TestRunner
             return;
         }
 
+        var beforeAllMethods = assembly
+            .GetTypes()
+            .Where(type => type.IsClass && type.IsPublic)
+            .SelectMany(clas => clas.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static))
+            .Where(method => method.GetCustomAttributes()
+                         .Any(attr => attr.GetType().Name == "BeforeAllAttribute"))
+            .ToList();
+
+        var output = new StringBuilder();
+
+        foreach (var method in beforeAllMethods)
+        {
+            try
+            {
+                object instance = method.IsStatic ? null : Activator.CreateInstance(method.DeclaringType);
+                method.Invoke(instance, null);
+            }
+            catch (TargetInvocationException tie)
+            {
+                output.AppendLine($"[BeforeAll failed] {method.Name}");
+                output.AppendLine($"\t{tie.InnerException?.Message}");
+            }
+            catch (Exception ex)
+            {
+                output.AppendLine($"[BeforeAll failed] {method.Name}");
+                output.AppendLine($"\t{ex.Message}");
+            }
+        }
+
+
         var testMethods = assembly
             .GetTypes()
             .Where(type => type.IsClass && type.IsPublic)
@@ -39,7 +69,6 @@ class TestRunner
             .GroupBy(method => method.DeclaringType)
             .ToList();
 
-        var output = new StringBuilder();
         int totalPassed = 0;
         int totalFailed = 0;
         foreach (var group in testGroups)
@@ -79,10 +108,41 @@ class TestRunner
         }
 
         output.AppendLine($"Total: {testMethods.Count}, Passed: {totalPassed}, Failed: {totalFailed}");
-        
+
         string filePath = "TestResults.txt";
         Console.WriteLine(output.ToString());
         File.WriteAllText(filePath, output.ToString());
         Console.WriteLine($"Test results written to {filePath}");
+
+        var afterAllMethods = assembly
+            .GetTypes()
+            .Where(type => type.IsClass && type.IsPublic)
+            .SelectMany(clas => clas.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static))
+            .Where(method => method.GetCustomAttributes()
+                         .Any(attr => attr.GetType().Name == "AfterAllAttribute"))
+            .ToList();
+
+
+        foreach (var method in afterAllMethods)
+        {
+            try
+            {
+                object instance = method.IsStatic ? null : Activator.CreateInstance(method.DeclaringType);
+                method.Invoke(instance, null);
+            }
+            catch (TargetInvocationException tie)
+            {
+                output.AppendLine($"[AfterAll failed] {method.Name}");
+                output.AppendLine($"\t{tie.InnerException?.Message}");
+            }
+            catch (Exception ex)
+            {
+                output.AppendLine($"[AfterAll failed] {method.Name}");
+                output.AppendLine($"\t{ex.Message}");
+            }
+        }
+        
     }
+    
+    
 }

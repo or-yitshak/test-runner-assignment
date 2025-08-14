@@ -36,4 +36,16 @@ public class StringTests
     {
         Assert.IsTrue(true, "true is true");
     }
+
+    [BeforeAll]
+    public void BeforeAllFun()
+    {
+        Console.WriteLine("hello we run first");
+    }
+    
+    [AfterAll]
+    public void AfterAllAllFun()
+    {
+        Console.WriteLine("hello we run last");
+    }
 }
