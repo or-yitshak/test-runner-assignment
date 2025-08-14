@@ -1,0 +1,24 @@
+MathTests:
+	[PASS] Add_ShouldReturnSum
+	[FAIL] ThisWillFail
+		5 is bigger than 1
+	[FAIL] DivisionByZero
+		Attempted to divide by zero.
+  Class Summary: Passed: 1, Failed: 2
+
+ObjectTests:
+	[PASS] Objects_WithSameReference_ShouldBeEqual
+	[PASS] Objects_WithDifferentReferences_ShouldNotBeEqual
+	[PASS] CustomObjects_WithSameValues_ShouldBeEqual
+  Class Summary: Passed: 3, Failed: 0
+
+StringTests:
+	[PASS] ShouldBeUppercase
+	[FAIL] ShouldBeUppercaseFail
+		String was not converted to uppercase.
+	[PASS] ShouldContainSubstring
+	[FAIL] ShouldContainSubstringFail
+		Substring 'awesome' not found.
+  Class Summary: Passed: 2, Failed: 2
+
+Total: 10, Passed: 6, Failed: 4
